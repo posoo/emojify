@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 #
 # emojify
 # https://github.com/mrowa44/emojify
@@ -2853,21 +2853,20 @@ help () {
 EOF
     if [[ 'list' == "$1" ]]; then
         echo 'Supported emojis:'
-        for key in "${!emojis[@]}"; do
+        for key in "${(@k)emojis}"; do
             echo -e "$key ${emojis[$key]}"
         done
     fi
     exit 0
 }
 
-# Checks the installed bash version to see if it's compatible with emojify
+# Checks the installed zsh version to see if it's compatible with emojify
 check_version () {
-    if (( ${BASH_VERSION%%.*} >= 4 )); then
+    if (( ${ZSH_VERSION%%.*} >= 5 )); then
         return
     else
-        echo -e "Oh my! That’s a very old version of bash you’re using, we don’t support that anymore :(\n" \
-        "\nConsider upgrading it or, if you must use bash ${BASH_VERSION} download an old version of" \
-        "emojify from here: https://github.com/mrowa44/emojify/blob/old_bash_support/emojify"
+        echo -e "Oh my! That’s a very old version of zsh you’re using, we don’t support that anymore :(\n" \
+        "\nConsider upgrading it, or switch to the version written in bash script if you have installed the bash whose version is greater than 4.*"
         exit 0
     fi
 }
